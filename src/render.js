@@ -12,12 +12,8 @@ function createElement(template) {
   return newElement.firstElementChild;
 }
 
-function renderAfterBegin(component, container, place = RenderPosition.AFTERBEGIN) {
+function render(component, container, place = RenderPosition.BEFOREEND) {
   container.insertAdjacentElement(place, component.getElement());
 }
 
-function renderBeforeEnd(component, container, place = RenderPosition.BEFOREEND) {
-  container.insertAdjacentElement(place, component.getElement());
-}
-
-export { RenderPosition, createElement, renderAfterBegin, renderBeforeEnd };
+export { RenderPosition, createElement, render };

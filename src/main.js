@@ -1,8 +1,6 @@
-import { renderAfterBegin, renderBeforeEnd } from './render.js';
-import TripInfoView from './view/trip-info-view.js';
-import FilterView from './view/filter-view.js';
+import HeaderPresenter from './presenter/header-presenter.js';
+import MainPresenter from './presenter/main-presenter.js';
 import ListPresenter from './presenter/list-presenter.js';
-import SortView from './view/sort-view.js';
 
 const header = document.querySelector('.page-header');
 const tripMain = header.querySelector('.trip-main');
@@ -10,13 +8,10 @@ const tripControlsFilters = header.querySelector('.trip-controls__filters');
 const main = document.querySelector('.page-main');
 const tripEvents = main.querySelector('.trip-events');
 
-const tripInfo = new TripInfoView();
-const filter = new FilterView();
-const sort = new SortView();
+const headerPresenter = new HeaderPresenter({ headerTripInfoContainer: tripMain, headerFilterContainer: tripControlsFilters });
 const listPresenter = new ListPresenter({ listContainer: tripEvents });
+const mainPresenter = new MainPresenter({ mainSortContainer: tripEvents });
 
-renderAfterBegin(tripInfo, tripMain);
-renderBeforeEnd(filter, tripControlsFilters);
-renderAfterBegin(sort, tripEvents);
-
+headerPresenter.init();
+mainPresenter.init();
 listPresenter.init();

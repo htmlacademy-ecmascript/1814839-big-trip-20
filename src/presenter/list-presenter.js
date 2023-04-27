@@ -1,4 +1,4 @@
-import { renderBeforeEnd } from '../render.js';
+import { render } from '../render.js';
 
 import ListView from '../view/list-view.js';
 import AddNewPointView from '../view/add-new-point-view.js';
@@ -12,11 +12,11 @@ export default class ListPresenter {
   }
 
   init() {
-    renderBeforeEnd(this.listComponent, this.listContainer);
-    renderBeforeEnd(new AddNewPointView(), this.listComponent.getElement());
+    render(this.listComponent, this.listContainer);
+    render(new AddNewPointView(), this.listComponent.getElement());
 
     for (let i = 0; i < 3; i++) {
-      renderBeforeEnd(new TripPoint(), this.listComponent.getElement());
+      render(new TripPoint(), this.listComponent.getElement());
     }
   }
 }
