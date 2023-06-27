@@ -1,7 +1,7 @@
 # Проект «Большое путешествие»
 
 * Студент: [Мария Свиридкина](https://up.htmlacademy.ru/ecmascript/20/user/1814839).
-* Наставник: [Артур Галимов](https://htmlacademy.ru/profile/id1237543).
+* Наставник: [Евгений ](https://htmlacademy.ru/profile/id1237543).
 
 ---
 
