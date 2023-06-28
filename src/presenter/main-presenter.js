@@ -4,6 +4,7 @@ import SortView from '../view/sort-view.js';
 export default class MainPresenter {
   mainSortComponent = new SortView();
 
+  //можно не деструктуризировать {}
   constructor({ mainSortContainer }) {
     this.mainSortContainer = mainSortContainer;
   }
