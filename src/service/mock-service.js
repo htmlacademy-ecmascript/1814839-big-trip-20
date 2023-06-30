@@ -1,8 +1,8 @@
 import { DESTINATION_COUNT, OFFER_COUNT, POINT_COUNT, TYPES } from '../mock/consts-mock.js';
 import { getRandomInteger, getRandomArrayElement } from '../utils.js';
-import { generateDestination } from '../mock/destination-mock.js';
-import { generateOffer } from '../mock/offer-mock.js';
-import { generatePoint } from '../mock/point-mock.js';
+import generateDestination from '../mock/destination-mock.js';
+import generateOffer from '../mock/offer-mock.js';
+import generatePoint from '../mock/point-mock.js';
 
 export default class MockService {
   destinations = [];
@@ -43,7 +43,6 @@ export default class MockService {
     }));
   }
 
-  // не понимаю, каким образом работает этот код, обьясни плз
   generatePointsArray() {
     return Array.from(
       { length: POINT_COUNT },
