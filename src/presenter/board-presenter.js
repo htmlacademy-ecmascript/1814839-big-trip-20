@@ -8,7 +8,7 @@ import { RenderPosition, render } from '../render.js';
 
 export default class BoardPresenter {
 
-  constructor({ pointsContainer, sortContainer, tripInfoContainer, filterContainer, editPointContainer, listContainer,
+  constructor({ sortContainer, tripInfoContainer, filterContainer, listContainer,
     destinationsModel, offersModel, pointsModel }) {
     //наверху в хэдере инфо о поездке
     this.tripInfoContainer = tripInfoContainer;
@@ -18,15 +18,13 @@ export default class BoardPresenter {
     this.sortContainer = sortContainer;
     // контейнер для точек
     this.listContainer = listContainer;
-    //редактирование точки
-    this.editPointContainer = editPointContainer;
     //точки
-    this.pointsContainer = pointsContainer;
     this.destinationModel = destinationsModel;
     this.offersModel = offersModel;
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
 
+    this.board = null;
   }
 
   //отрисовка инфы о трипе
@@ -51,12 +49,13 @@ export default class BoardPresenter {
   renderListComponent() {
     const listComponent = new ListView;
     render(listComponent, this.listContainer);
+    this.board = document.querySelector('.trip-events__list');
   }
 
   //отрисовка редактирования точки
   renderEditPointComponent() {
     const editPointComponent = new EditPointView();
-    render(editPointComponent, this.editPointContainer, RenderPosition.AFTERBEGIN);
+    render(editPointComponent, this.board, RenderPosition.AFTERBEGIN);
   }
 
   //отрисовка точек
@@ -66,7 +65,7 @@ export default class BoardPresenter {
       pointDestination: this.destinationModel,
       pointOffers: this.offersModel
     });
-    render(point, this.pointsContainer);
+    render(point, this.board);
   }
 
   renderEvents() {

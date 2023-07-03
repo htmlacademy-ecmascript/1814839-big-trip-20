@@ -16,10 +16,8 @@ const offersModel = new OffersModel(mockService);
 const pointsModel = new PointsModel(mockService);
 
 const boardPresenter = new BoardPresenter({
-  listContainer: tripEvents,
   sortContainer: tripEvents,
-  editPointContainer: tripEvents,
-  pointsContainer: tripEvents,
+  listContainer: tripEvents,
   tripInfoContainer: tripMain,
   filterContainer: tripControlsFilters,
   pointsModel,
