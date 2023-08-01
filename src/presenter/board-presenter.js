@@ -20,11 +20,17 @@ export default class BoardPresenter {
     this.listContainer = listContainer;
     //точки
     this.destinationModel = destinationsModel;
-    this.offersModel = offersModel;
+    this.offersModel = [...offersModel.get()];
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
 
     this.board = null;
+  }
+
+  //отрисовка редактировани точки
+  renderEditPointComponent() {
+    const editPointComponent = new EditPointView(this.offersModel);
+    render(editPointComponent, this.sortContainer);
   }
 
   //отрисовка инфы о трипе
