@@ -1,17 +1,13 @@
 import { createElement } from '../render.js';
 import { CITIES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
-import MockService from '../service/mock-service.js';
-
 
 // мне нужно использовать цикл, чтобы создавать каждый раз офферы
 // передаю в форму готовые выбранные формы формы выбират внутри презентера
 const getOffers = (type, offersData) => {
-  // const mockService = new MockService();
-  console.log(offersData, 123);
-  const offersByType = offersData.offers.find((offer) => offer.type === type).offers;
+  const offersByType = offersData.find((offer) => offer.type === type);
 
-  return offersByType.map(
+  return offersByType.offers.map(
     (offer) => `<div class="event__available-offers">
     <div class="event__offer-selector">
       <input class="event__offer-checkbox  visually-hidden" id="offer-${offer.id}" type="checkbox" name="offer-${offer.id}">
@@ -128,7 +124,7 @@ const getTemplate = (offersData) => {
               <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
               <div class="event__available-offers">
-              ${getOffers(offersData)}
+              ${getOffers('taxi', offersData)}
               </div>
             </section>
 
