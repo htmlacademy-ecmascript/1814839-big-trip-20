@@ -1,5 +1,5 @@
 import { createElement } from '../render.js';
-import { CITIES } from '../mock/consts-mock.js';
+import { CITIES, TYPES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
 
 // мне нужно использовать цикл, чтобы создавать каждый раз офферы
@@ -20,9 +20,12 @@ const getOffers = (type, offersData) => {
   ).join('');
 };
 
+const getRandomType = () => getRandomArrayElement(TYPES);
+
 // как сделать рандомизацию выбора чекнутых кнопок?
 const getTemplate = (offersData) => {
   const name = getRandomArrayElement(CITIES);
+  const type = getRandomType();
   return `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
       <header class="event__header">
@@ -89,7 +92,7 @@ const getTemplate = (offersData) => {
           <label class="event__label  event__type-output" for="event-destination-1">
             Flight
           </label>
-          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${name}" list="destination-list-1">
+          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${type} ${name}" list="destination-list-1">
             <datalist id="destination-list-1">
               <option value="Amsterdam"></option>
               <option value="Geneva"></option>
@@ -124,7 +127,7 @@ const getTemplate = (offersData) => {
               <h3 class="event__section-title  event__section-title--offers">Offers</h3>
 
               <div class="event__available-offers">
-              ${getOffers('taxi', offersData)}
+              ${getOffers(type, offersData)}
               </div>
             </section>
 

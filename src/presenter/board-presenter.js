@@ -20,17 +20,17 @@ export default class BoardPresenter {
     this.listContainer = listContainer;
     //точки
     this.destinationModel = destinationsModel;
-    this.offersModel = [...offersModel.get()];
+    this.offersModel = offersModel.get();
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
 
     this.board = null;
   }
 
-  //отрисовка редактировани точки
+  //отрисовка редактирования точки
   renderEditPointComponent() {
     const editPointComponent = new EditPointView(this.offersModel);
-    render(editPointComponent, this.sortContainer);
+    render(editPointComponent, this.board, RenderPosition.AFTERBEGIN);
   }
 
   //отрисовка инфы о трипе
@@ -56,12 +56,6 @@ export default class BoardPresenter {
     const listComponent = new ListView;
     render(listComponent, this.listContainer);
     this.board = document.querySelector('.trip-events__list');
-  }
-
-  //отрисовка редактирования точки
-  renderEditPointComponent() {
-    const editPointComponent = new EditPointView();
-    render(editPointComponent, this.board, RenderPosition.AFTERBEGIN);
   }
 
   //отрисовка точек
