@@ -8,15 +8,12 @@ const getOffers = (type, offersData) => {
   const offersByType = offersData.find((offer) => offer.type === type);
 
   return offersByType.offers.map(
-    (offer) => `<div class="event__available-offers">
-    <div class="event__offer-selector">
-      <input class="event__offer-checkbox  visually-hidden" id="offer-${offer.id}" type="checkbox" name="offer-${offer.id}">
+    (offer) => `<input class="event__offer-checkbox  visually-hidden" id="offer-${offer.id}" type="checkbox" name="offer-${offer.id}">
         <label class="event__offer-label" for="offer-${offer.id}">
           <span class="event__offer-title">${offer.title}</span>
           &plus;&euro;&nbsp;
           <span class="event__offer-price">${offer.price}</span>
-        </label>
-    </div>`
+        </label>`
   ).join('');
 };
 
