@@ -2,8 +2,6 @@ import { createElement } from '../render.js';
 import { CITIES, TYPES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
 
-// мне нужно использовать цикл, чтобы создавать каждый раз офферы
-// передаю в форму готовые выбранные формы формы выбират внутри презентера
 const getOffers = (type, offersData) => {
   const offersByType = offersData.find((offer) => offer.type === type);
 
@@ -19,7 +17,6 @@ const getOffers = (type, offersData) => {
 
 const getRandomType = () => getRandomArrayElement(TYPES);
 
-// как сделать рандомизацию выбора чекнутых кнопок?
 const getTemplate = (offersData) => {
   const name = getRandomArrayElement(CITIES);
   const type = getRandomType();

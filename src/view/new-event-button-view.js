@@ -1,12 +1,10 @@
 import { createElement } from '../render.js';
-export default class NewEventButtonView {
-  getTemplate() {
-    return '<button class="trip-main__event-add-btn  btn  btn--big  btn--yellow" type="button">New event</button>';
-  }
 
+const getTemplate = () => '<button class="trip-main__event-add-btn  btn  btn--big  btn--yellow" type="button">New event</button>';
+export default class NewEventButtonView {
   getElement() {
     if (!this.element) {
-      this.element = createElement(this.getTemplate());
+      this.element = createElement(getTemplate());
     }
 
     return this.element;

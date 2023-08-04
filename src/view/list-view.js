@@ -1,13 +1,11 @@
 import { createElement } from '../render.js';
+
+const getTemplate = () => '<ul class="trip-events__list"></ul>';
 export default class ListView {
-  getTemplate() {
-    return (
-      '<ul class="trip-events__list"></ul>');
-  }
 
   getElement() {
     if (!this.element) {
-      this.element = createElement(this.getTemplate());
+      this.element = createElement(getTemplate());
     }
 
     return this.element;
