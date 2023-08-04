@@ -1,6 +1,8 @@
-import HeaderPresenter from './presenter/header-presenter.js';
-import MainPresenter from './presenter/main-presenter.js';
-import ListPresenter from './presenter/list-presenter.js';
+import BoardPresenter from './presenter/board-presenter.js';
+import MockService from './service/mock-service.js';
+import DestinationsModel from './model/destinations-model.js';
+import OffersModel from './model/offers-model.js';
+import PointsModel from './model/points-model.js';
 
 const header = document.querySelector('.page-header');
 const tripMain = header.querySelector('.trip-main');
@@ -8,10 +10,19 @@ const tripControlsFilters = header.querySelector('.trip-controls__filters');
 const main = document.querySelector('.page-main');
 const tripEvents = main.querySelector('.trip-events');
 
-const headerPresenter = new HeaderPresenter({ headerTripInfoContainer: tripMain, headerFilterContainer: tripControlsFilters });
-const listPresenter = new ListPresenter({ listContainer: tripEvents });
-const mainPresenter = new MainPresenter({ mainSortContainer: tripEvents });
+const mockService = new MockService();
+const destinationsModel = new DestinationsModel(mockService);
+const offersModel = new OffersModel(mockService);
+const pointsModel = new PointsModel(mockService);
 
-headerPresenter.init();
-mainPresenter.init();
-listPresenter.init();
+const boardPresenter = new BoardPresenter({
+  sortContainer: tripEvents,
+  listContainer: tripEvents,
+  tripInfoContainer: tripMain,
+  filterContainer: tripControlsFilters,
+  pointsModel,
+  offersModel,
+  destinationsModel
+});
+
+boardPresenter.init();
