@@ -4,82 +4,90 @@ import TripInfoView from '../view/trip-info-view.js';
 import FilterView from '../view/filter-view.js';
 import EditPointView from '../view/edit-point-view.js';
 import ListView from '../view/list-view.js';
-import { RenderPosition, render } from '../render.js';
+import { RenderPosition, render } from '../framework/render.js';
 
 export default class BoardPresenter {
+
+  #tripInfoContainer = null;
+  #filterContainer = null;
+  #sortContainer = null;
+  #listContainer = null;
+  #destinationModel = null;
+  #offersModel = null;
+  #board = null;
 
   constructor({ sortContainer, tripInfoContainer, filterContainer, listContainer,
     destinationsModel, offersModel, pointsModel }) {
     //наверху в хэдере инфо о поездке
-    this.tripInfoContainer = tripInfoContainer;
+    this.#tripInfoContainer = tripInfoContainer;
     //фильтрация
-    this.filterContainer = filterContainer;
+    this.#filterContainer = filterContainer;
     //сортировка
-    this.sortContainer = sortContainer;
+    this.#sortContainer = sortContainer;
     // контейнер для точек
-    this.listContainer = listContainer;
+    this.#listContainer = listContainer;
     //точки
-    this.destinationModel = destinationsModel;
-    this.offersModel = offersModel.get();
+    this.#destinationModel = destinationsModel;
+    this.#offersModel = offersModel.get();
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
 
-    this.board = null;
+    this.#board = null;
   }
 
   //отрисовка редактирования точки
-  renderEditPointComponent() {
-    const editPointComponent = new EditPointView(this.offersModel);
-    render(editPointComponent, this.board, RenderPosition.AFTERBEGIN);
+  #renderEditPointComponent() {
+    const editPointComponent = new EditPointView(this.#offersModel);
+    render(editPointComponent, this.#board, RenderPosition.AFTERBEGIN);
   }
 
   //отрисовка инфы о трипе
-  renderInfoComponent() {
+  #renderInfoComponent() {
     const tripInfoConponent = new TripInfoView();
-    render(tripInfoConponent, this.tripInfoContainer, RenderPosition.AFTERBEGIN);
+    render(tripInfoConponent, this.#tripInfoContainer, RenderPosition.AFTERBEGIN);
   }
 
   //отрисовка фильтрации
-  renderFilterComponent() {
+  #renderFilterComponent() {
     const filterComponent = new FilterView();
-    render(filterComponent, this.filterContainer, RenderPosition.AFTERBEGIN);
+    render(filterComponent, this.#filterContainer, RenderPosition.AFTERBEGIN);
   }
 
   //отрисовка сортировки
-  renderSortComponent() {
+  #renderSortComponent() {
     const sortComponent = new SortView();
-    render(sortComponent, this.sortContainer);
+    render(sortComponent, this.#sortContainer);
   }
 
   //отрисовка контейнера для точек
-  renderListComponent() {
+  #renderListComponent() {
     const listComponent = new ListView;
-    render(listComponent, this.listContainer);
-    this.board = document.querySelector('.trip-events__list');
+    render(listComponent, this.#listContainer);
+    this.#board = document.querySelector('.trip-events__list');
   }
 
   //отрисовка точек
-  renderEvent(eventPoint) {
+  #renderEvent(eventPoint) {
     const point = new TripPointView({
       point: eventPoint,
-      pointDestination: this.destinationModel,
+      pointDestination: this.#destinationModel,
       pointOffers: this.offersModel
     });
-    render(point, this.board);
+    render(point, this.#board);
   }
 
-  renderEvents() {
+  #renderEvents() {
     this.points.forEach((point) => {
-      this.renderEvent(point);
+      this.#renderEvent(point);
     });
   }
 
   init() {
-    this.renderSortComponent();
-    this.renderListComponent();
-    this.renderInfoComponent();
-    this.renderFilterComponent();
-    this.renderEditPointComponent();
-    this.renderEvents();
+    this.#renderSortComponent();
+    this.#renderListComponent();
+    this.#renderInfoComponent();
+    this.#renderFilterComponent();
+    this.#renderEditPointComponent();
+    this.#renderEvents();
   }
 }

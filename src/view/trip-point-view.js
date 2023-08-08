@@ -57,7 +57,7 @@ const getTemplate = (point) => {
 export default class TripPointView extends AbstractView {
   #point = null;
 
-  constructor(point) {
+  constructor({ point }) {
     super();
     this.#point = point;
   }
