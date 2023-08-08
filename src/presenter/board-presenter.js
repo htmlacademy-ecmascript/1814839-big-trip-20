@@ -2,9 +2,9 @@ import TripPointView from '../view/trip-point-view.js';
 import SortView from '../view/sort-view.js';
 import TripInfoView from '../view/trip-info-view.js';
 import FilterView from '../view/filter-view.js';
-import EditPointView from '../view/edit-point-view.js';
 import ListView from '../view/list-view.js';
 import { RenderPosition, render } from '../framework/render.js';
+// import EditPointView from '../view/edit-point-view.js';
 
 export default class BoardPresenter {
 
@@ -36,10 +36,10 @@ export default class BoardPresenter {
   }
 
   //отрисовка редактирования точки
-  #renderEditPointComponent() {
-    const editPointComponent = new EditPointView(this.#offersModel);
-    render(editPointComponent, this.#board, RenderPosition.AFTERBEGIN);
-  }
+  // #renderEditPointComponent() {
+  //   const editPointComponent = new EditPointView(this.#offersModel);
+  //   render(editPointComponent, this.#board, RenderPosition.AFTERBEGIN);
+  // }
 
   //отрисовка инфы о трипе
   #renderInfoComponent() {
@@ -87,7 +87,7 @@ export default class BoardPresenter {
     this.#renderListComponent();
     this.#renderInfoComponent();
     this.#renderFilterComponent();
-    this.#renderEditPointComponent();
     this.#renderEvents();
+    // this.#renderEditPointComponent();
   }
 }
