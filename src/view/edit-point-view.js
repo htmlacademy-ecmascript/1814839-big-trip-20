@@ -1,6 +1,6 @@
-import { createElement } from '../render.js';
 import { CITIES, TYPES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const getOffers = (type, offersData) => {
   const offersByType = offersData.find((offer) => offer.type === type);
@@ -133,21 +133,34 @@ const getTemplate = (offersData) => {
         </form>
       </li>`;
 };
-export default class EditPointView {
+
+export default class EditPointView extends AbstractView {
+  #offersData = null;
 
   constructor(offersData) {
-    this.offersData = offersData;
+    super();
+    this.#offersData = offersData;
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(getTemplate(this.offersData));
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return getTemplate(this.#offersData);
   }
 }
+
+// export default class EditPointView {
+//   constructor(offersData) {
+//     this.offersData = offersData;
+//   }
+
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(getTemplate(this.offersData));
+//     }
+
+//     return this.element;
+//   }
+
+//   removeElement() {
+//     this.element = null;
+//   }
+// }

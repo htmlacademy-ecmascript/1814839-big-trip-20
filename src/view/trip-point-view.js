@@ -1,4 +1,4 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
 import MockService from '../service/mock-service.js';
@@ -54,21 +54,33 @@ const getTemplate = (point) => {
 </li> `;
 };
 
+export default class TripPointView extends AbstractView {
+  #point = null;
 
-export default class TripPointView {
-  constructor({ point }) {
-    this.point = point;
+  constructor(point) {
+    super();
+    this.#point = point;
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(getTemplate(this.point));
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+  get template() {
+    return getTemplate(this.#point);
   }
 }
+
+// export default class TripPointView {
+//   constructor({ point }) {
+//     this.point = point;
+//   }
+
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(getTemplate(this.point));
+//     }
+
+//     return this.element;
+//   }
+
+//   removeElement() {
+//     this.element = null;
+//   }
+// }
