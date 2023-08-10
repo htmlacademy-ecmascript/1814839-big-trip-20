@@ -136,15 +136,46 @@ const getTemplate = (offersData) => {
 
 export default class EditPointView extends AbstractView {
   #offersData = null;
+  #onSubmitClick = null;
+  #onResetClick = null;
+  #onRollUpClick = null;
 
-  constructor({ offersData }) {
+  constructor({ offersData, onSubmitClick, onResetClick, onRollUpClick }) {
     super();
     this.#offersData = offersData;
+    this.#onSubmitClick = onSubmitClick;
+    this.#onResetClick = onResetClick;
+    this.#onRollUpClick = onRollUpClick;
+
+    this.element
+      .querySelector('.event__save-btn')
+      .addEventListener('click', this.#submitClickHandler);
+    this.element
+      .querySelector('.event__reset-btn')
+      .addEventListener('click', this.#resetClickHandler);
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#rollUpClickHandler);
   }
 
   get template() {
     return getTemplate(this.#offersData);
   }
+
+  #submitClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onSubmitClick();
+  };
+
+  #resetClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onResetClick();
+  };
+
+  #rollUpClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onRollUpClick();
+  };
 }
 
 // export default class EditPointView {

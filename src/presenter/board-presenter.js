@@ -71,8 +71,9 @@ export default class BoardPresenter {
 
     const editPointComponent = new EditPointView({
       offersData: this.#offersModel,
+      onSubmitClick: pointSubmitHandler,
       onResetClick: resetButtonClickHandler,
-      onSubmitClick: pointSubmitHandler
+      onRollUpClick: rollUpButtonClickHandler,
     });
 
     const replacePointToForm = () => {
@@ -80,7 +81,7 @@ export default class BoardPresenter {
     };
 
     const replaceFormToPoint = () => {
-      replace(editPointComponent, pointComponent);
+      replace(pointComponent, editPointComponent);
     };
 
     const escKeyDownHandler = (evt) => {
@@ -96,12 +97,17 @@ export default class BoardPresenter {
       document.addEventListener('keydown', escKeyDownHandler);
     }
 
+    function pointSubmitHandler() {
+      replaceFormToPoint();
+      document.removeEventListener('keydown', escKeyDownHandler);
+    }
+
     function resetButtonClickHandler() {
       replaceFormToPoint();
       document.removeEventListener('keydown', escKeyDownHandler);
     }
 
-    function pointSubmitHandler() {
+    function rollUpButtonClickHandler() {
       replaceFormToPoint();
       document.removeEventListener('keydown', escKeyDownHandler);
     }
