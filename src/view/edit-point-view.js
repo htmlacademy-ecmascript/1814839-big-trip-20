@@ -137,7 +137,7 @@ const getTemplate = (offersData) => {
 export default class EditPointView extends AbstractView {
   #offersData = null;
 
-  constructor(offersData) {
+  constructor({ offersData }) {
     super();
     this.#offersData = offersData;
   }
