@@ -1,4 +1,4 @@
-import { createElement } from '../render.js';
+import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
 import MockService from '../service/mock-service.js';
@@ -47,28 +47,52 @@ const getTemplate = (point) => {
         <path d="M14 21l-8.22899 4.3262 1.57159-9.1631L.685209 9.67376 9.8855 8.33688 14 0l4.1145 8.33688 9.2003 1.33688-6.6574 6.48934 1.5716 9.1631L14 21z" />
       </svg>
     </button>
-    <button class="event__rollup-btn" type="button">
+    <button class="event__rollup-btn" type="button"> //на вот эту кнопку навешиваются евент листнеры
       <span class="visually-hidden">Open event</span>
     </button>
   </div >
 </li> `;
 };
 
+export default class TripPointView extends AbstractView {
+  #point = null;
+  #onEditClick = null;
 
-export default class TripPointView {
-  constructor({ point }) {
-    this.point = point;
+  constructor({ point, onEditClick }) {
+    super();
+    this.#point = point;
+    this.#onEditClick = onEditClick;
+
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#editClickHandler);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(getTemplate(this.point));
-    }
-
-    return this.element;
+  get template() {
+    return getTemplate(this.#point);
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  #editClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onEditClick();
+  };
 }
+
+
+// export default class TripPointView {
+//   constructor({ point }) {
+//     this.point = point;
+//   }
+
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(getTemplate(this.point));
+//     }
+
+//     return this.element;
+//   }
+
+//   removeElement() {
+//     this.element = null;
+//   }
+// }

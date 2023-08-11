@@ -1,9 +1,7 @@
-import { createElement } from '../render.js';
 import { CITIES, TYPES } from '../mock/consts-mock.js';
 import { getRandomArrayElement } from '../utils.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
-// мне нужно использовать цикл, чтобы создавать каждый раз офферы
-// передаю в форму готовые выбранные формы формы выбират внутри презентера
 const getOffers = (type, offersData) => {
   const offersByType = offersData.find((offer) => offer.type === type);
 
@@ -19,7 +17,6 @@ const getOffers = (type, offersData) => {
 
 const getRandomType = () => getRandomArrayElement(TYPES);
 
-// как сделать рандомизацию выбора чекнутых кнопок?
 const getTemplate = (offersData) => {
   const name = getRandomArrayElement(CITIES);
   const type = getRandomType();
@@ -136,21 +133,65 @@ const getTemplate = (offersData) => {
         </form>
       </li>`;
 };
-export default class EditPointView {
 
-  constructor(offersData) {
-    this.offersData = offersData;
+export default class EditPointView extends AbstractView {
+  #offersData = null;
+  #onSubmitClick = null;
+  #onResetClick = null;
+  #onRollUpClick = null;
+
+  constructor({ offersData, onSubmitClick, onResetClick, onRollUpClick }) {
+    super();
+    this.#offersData = offersData;
+    this.#onSubmitClick = onSubmitClick;
+    this.#onResetClick = onResetClick;
+    this.#onRollUpClick = onRollUpClick;
+
+    this.element
+      .querySelector('.event__save-btn')
+      .addEventListener('click', this.#submitClickHandler);
+    this.element
+      .querySelector('.event__reset-btn')
+      .addEventListener('click', this.#resetClickHandler);
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.#rollUpClickHandler);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(getTemplate(this.offersData));
-    }
-
-    return this.element;
+  get template() {
+    return getTemplate(this.#offersData);
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  #submitClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onSubmitClick();
+  };
+
+  #resetClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onResetClick();
+  };
+
+  #rollUpClickHandler = (evt) => {
+    evt.preventDefault();
+    this.#onRollUpClick();
+  };
 }
+
+// export default class EditPointView {
+//   constructor(offersData) {
+//     this.offersData = offersData;
+//   }
+
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(getTemplate(this.offersData));
+//     }
+
+//     return this.element;
+//   }
+
+//   removeElement() {
+//     this.element = null;
+//   }
+// }

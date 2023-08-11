@@ -1,30 +1,36 @@
-import { createElement } from '../render.js';
-export default class TripInfoView {
-  getTemplate() {
-    return (/*html*/
-      `<section class="trip-main__trip-info  trip-info">
-      <div class="trip-info__main">
-        <h1 class="trip-info__title">Amsterdam &mdash; Chamonix &mdash; Geneva</h1>
+import AbstractView from '../framework/view/abstract-view.js';
 
-        <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;20</p>
-      </div>
+const getTemplate = () =>
+  `<section class="trip-main__trip-info  trip-info">
+    <div class="trip-info__main">
+      <h1 class="trip-info__title">Amsterdam &mdash; Chamonix &mdash; Geneva</h1>
 
-      <p class="trip-info__cost">
-        Total: &euro;&nbsp;<span class="trip-info__cost-value">1230</span>
-      </p>
-    </section>`);
-  }
+      <p class="trip-info__dates">Mar 18&nbsp;&mdash;&nbsp;20</p>
+    </div>
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
+    <p class="trip-info__cost">
+      Total: &euro;&nbsp;<span class="trip-info__cost-value">1230</span>
+    </p>
+  </section>`;
 
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+export default class TripInfoView extends AbstractView {
+  get template() {
+    return getTemplate;
   }
 }
+
+// export default class TripInfoView {
+
+//   getElement() {
+//     if (!this.element) {
+//       this.element = createElement(getTemplate());
+//     }
+
+//     return this.element;
+//   }
+
+//   removeElement() {
+//     this.element = null;
+//   }
+// }
 
