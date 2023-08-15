@@ -1,6 +1,6 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/consts-mock.js';
-import { getRandomArrayElement } from '../utils.js';
+import { getRandomArrayElement, getPointDuration } from '../utils.js';
 import MockService from '../service/mock-service.js';
 
 const getOffers = (type) => {
@@ -18,6 +18,7 @@ const getOffers = (type) => {
 const getTemplate = (point) => {
   const name = getRandomArrayElement(CITIES);
   const { type, basePrice, isFavorite, dateFrom, dateTo } = point;
+  //почему отображается 0? что я не так делаю?
 
   return `<li class="trip-events__item" >
   <div class="event">
@@ -32,7 +33,7 @@ const getTemplate = (point) => {
         &mdash;
         <time class="event__end-time" datetime="2019-03-18T11:00">${dateTo}</time>
       </p>
-      <p class="event__duration">30M</p>
+      <p class="event__duration">${getPointDuration(dateFrom, dateTo)}</p>
     </div>
     <p class="event__price">
       &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
