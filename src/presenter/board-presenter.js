@@ -132,7 +132,7 @@ export default class BoardPresenter {
   //отрисовка доски полностью со всеми компонентами
   //почему эта проверка не работает?
   #renderBoard = () => {
-    if (this.points.length < 0) {
+    if (this.points.length <= 0) {
       this.#renderNoPoinView();
       return;
     }
