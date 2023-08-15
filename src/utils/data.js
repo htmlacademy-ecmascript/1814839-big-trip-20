@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import {
-  MSEC_IN_HOUR, MSEC_IN_DAY
-} from './mock/consts-mock.js';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+
+const MSEC_IN_HOUR = 3600000;
+const MSEC_IN_DAY = 86400000;
 
 function getPointDuration(dateFrom, dateTo) {
   const timeDiff = dayjs(dateTo).diff(dayjs(dateFrom));
@@ -26,17 +26,4 @@ function getPointDuration(dateFrom, dateTo) {
   return pointDuration;
 }
 
-//помоги понять, как мне принимаемую дату отформатировать с помощью dayjs? использовать метод parse? или есть способы лучше?
-//и как это организовать в коде лучше?
-
-function getRandomInteger(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomArrayElement(array) {
-  return array[getRandomInteger(0, array.length - 1)];
-}
-
-export { getRandomInteger, getRandomArrayElement, getPointDuration };
+export { getPointDuration };

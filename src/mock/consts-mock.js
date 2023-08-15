@@ -41,22 +41,19 @@ const Price = {
   MAX: 10000
 };
 
-
-//попробовала разные варианты формата даты, все-равно показывает 0! почему?
 const DATE_TO = [
-  '2018-04-15 16:18'
+  '2018-04-15 16:19',
+  '2018-04-16 21:18',
+  '2018-04-17 14:14',
+  '2018-04-18 12:58',
 ];
 
 const DATE_FROM = [
-  '2018-04-13 19:18'
+  '2018-04-13 22:28',
+  '2018-04-12 11:38',
+  '2018-04-11 12:48',
+  '2018-04-10 14:58',
 ];
-
-const MSEC_IN_SEC = 1000;
-const SEC_IN_MIN = 60;
-const MIN_IN_HOUR = 60;
-const HOUR_IN_DAY = 24;
-const MSEC_IN_HOUR = MIN_IN_HOUR * SEC_IN_MIN * MSEC_IN_SEC;
-const MSEC_IN_DAY = HOUR_IN_DAY * MSEC_IN_HOUR;
 
 export {
   OFFER_TITLES,
@@ -68,11 +65,5 @@ export {
   TYPES,
   Price,
   DATE_TO,
-  DATE_FROM,
-  MSEC_IN_SEC,
-  SEC_IN_MIN,
-  MIN_IN_HOUR,
-  HOUR_IN_DAY,
-  MSEC_IN_HOUR,
-  MSEC_IN_DAY
+  DATE_FROM
 };

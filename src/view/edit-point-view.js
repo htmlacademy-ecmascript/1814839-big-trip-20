@@ -1,5 +1,5 @@
 import { CITIES, TYPES } from '../mock/consts-mock.js';
-import { getRandomArrayElement } from '../utils.js';
+import { getRandomArrayElement } from '../utils/common.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
 const getOffers = (type, offersData) => {

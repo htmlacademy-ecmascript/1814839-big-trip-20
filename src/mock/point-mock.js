@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomArrayElement } from '../utils.js';
+import { getRandomInteger, getRandomArrayElement } from '../utils/common.js';
 import { Price, DATE_TO, DATE_FROM } from './consts-mock.js';
 
 export default function generatePoint(type, destinationId, offerId) {

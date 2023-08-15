@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomArrayElement } from '../utils.js';
+import { getRandomInteger, getRandomArrayElement } from '../utils/common.js';
 import { Price, OFFER_TITLES } from './consts-mock.js';
 
 export default function generateOffer() {

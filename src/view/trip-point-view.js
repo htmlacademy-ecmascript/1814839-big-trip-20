@@ -1,6 +1,7 @@
 import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/consts-mock.js';
-import { getRandomArrayElement, getPointDuration } from '../utils.js';
+import { getRandomArrayElement } from '../utils/common.js';
+import { getPointDuration } from '../utils/data.js';
 import MockService from '../service/mock-service.js';
 import dayjs from 'dayjs';
 
@@ -19,8 +20,6 @@ const getOffers = (type) => {
 const getTemplate = (point) => {
   const name = getRandomArrayElement(CITIES);
   const { type, basePrice, isFavorite, dateFrom, dateTo } = point;
-  //почему отображается 0? что я не так делаю?
-  //добавить дату в разметку
 
   return `<li class="trip-events__item" >
   <div class="event">
