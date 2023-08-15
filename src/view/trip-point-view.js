@@ -2,6 +2,7 @@ import AbstractView from '../framework/view/abstract-view.js';
 import { CITIES } from '../mock/consts-mock.js';
 import { getRandomArrayElement, getPointDuration } from '../utils.js';
 import MockService from '../service/mock-service.js';
+import dayjs from 'dayjs';
 
 const getOffers = (type) => {
   const mockService = new MockService();
@@ -19,19 +20,20 @@ const getTemplate = (point) => {
   const name = getRandomArrayElement(CITIES);
   const { type, basePrice, isFavorite, dateFrom, dateTo } = point;
   //почему отображается 0? что я не так делаю?
+  //добавить дату в разметку
 
   return `<li class="trip-events__item" >
   <div class="event">
-    <time class="event__date" datetime="2019-03-18">${dateFrom}</time>
+    <time class="event__date" datetime="${dayjs(dateFrom).format('DD.MM.YYYY.HH.mm')}">${dayjs(dateFrom).format('DD MMM')}</time>
     <div class="event__type">
       <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event ${type} icon">
     </div >
     <h3 class="event__title">${type} ${name}</h3>
     <div class="event__schedule">
       <p class="event__time">
-        <time class="event__start-time" datetime="2019-03-18T10:30">${dateFrom}</time>
+        <time class="event__start-time" datetime="${dayjs(dateFrom).format('DD.MM.YYYY.HH.mm')}">${dayjs(dateFrom).format('DD.MM.YYYY.HH.mm')}</time>
         &mdash;
-        <time class="event__end-time" datetime="2019-03-18T11:00">${dateTo}</time>
+        <time class="event__end-time" datetime="${dayjs(dateTo).format('DD.MM.YYYY.HH.mm')}">${dayjs(dateTo).format('DD.MM.YYYY.HH.mm')}</time>
       </p>
       <p class="event__duration">${getPointDuration(dateFrom, dateTo)}</p>
     </div>
