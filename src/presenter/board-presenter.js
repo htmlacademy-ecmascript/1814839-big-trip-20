@@ -6,6 +6,7 @@ import ListView from '../view/list-view.js';
 import EditPointView from '../view/edit-point-view.js';
 import NoPointView from '../view/no-point-view.js';
 import { RenderPosition, replace, render } from '../framework/render.js';
+import { generateFilters } from '../mock/filter-mock.js';
 
 export default class BoardPresenter {
 
@@ -16,6 +17,7 @@ export default class BoardPresenter {
   #destinationModel = null;
   #board = null;
   #offersModel = null;
+  #filters = [];
 
   constructor({ sortContainer, tripInfoContainer, filterContainer, listContainer,
     destinationsModel, pointsModel, offersModel }) {
@@ -32,8 +34,9 @@ export default class BoardPresenter {
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
     this.#offersModel = offersModel.get();
-
+    this.#filters = generateFilters();
     this.#board = null;
+    this.#filters = generateFilters(this.points);
   }
 
   //отрисовка инфы о трипе
@@ -49,8 +52,9 @@ export default class BoardPresenter {
   };
 
   //отрисовка фильтрации
+  //настроить передачу фильтров
   #renderFilterComponent = () => {
-    const filterComponent = new FilterView();
+    const filterComponent = new FilterView(this.#filters, this.filterContainer);
     render(filterComponent, this.#filterContainer, RenderPosition.AFTERBEGIN);
   };
 
@@ -130,7 +134,6 @@ export default class BoardPresenter {
   }
 
   //отрисовка доски полностью со всеми компонентами
-  //почему эта проверка не работает?
   #renderBoard = () => {
     if (this.points.length <= 0) {
       this.#renderNoPoinView();

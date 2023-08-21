@@ -1,18 +1,29 @@
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 
-// const FilterType = {
-//   EVERYTHING: 'everything',
-//   FUTURE: 'future',
-//   PRESENT: 'present',
-//   PAST: 'past',
-// };
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PRESENT: 'present',
+  PAST: 'past',
+};
 
-// function isFutureEvent(event) {
-//   return event.dateFrom > dayjs();
-// };
+function isPointFuture(point) {
+  return dayjs().isBefore(point.dateTo);
+}
 
-// const filter = {
-//   [FilterType.FUTURE]: (events) => events.filter((event.dateFrom) => isFutureEvent),
-// };
+function isPointPresent(point) {
+  return dayjs().isAfter(point.dateFrom) && dayjs().isBefore(point.dateTo);
+}
 
-// export { filter };
+function isPointPast(point) {
+  return dayjs().isAfter(point.dateTo);
+}
+
+const filter = {
+  [FilterType.EVERYTHING]: (points) => [...points],
+  [FilterType.FUTURE]: (points) => points.filter((point) => isPointFuture(point)),
+  [FilterType.PRESENT]: (points) => points.filter((point) => isPointPresent(point)),
+  [FilterType.PAST]: (points) => points.filter((point) => isPointPast(point)),
+};
+
+export { filter };
