@@ -16,7 +16,7 @@ function getFilterItem(filter) {
     `;
 }
 
-function getTemplate({ filters }) {
+function getTemplate(filters) {
   return `
   <form class="trip-filters" action = "#" method = "get" >
 ${filters.map(getFilterItem).join('')}
@@ -28,7 +28,7 @@ ${filters.map(getFilterItem).join('')}
 export default class FilterView extends AbstractView {
   #filters = null;
 
-  constructor({ filters }) {
+  constructor(filters) {
     super();
     this.#filters = filters;
   }
