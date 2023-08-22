@@ -34,7 +34,6 @@ export default class BoardPresenter {
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
     this.#offersModel = offersModel.get();
-    this.#filters = generateFilters();
     this.#board = null;
     this.#filters = generateFilters(this.points);
   }
@@ -54,7 +53,7 @@ export default class BoardPresenter {
   //отрисовка фильтрации
   //настроить передачу фильтров
   #renderFilterComponent = () => {
-    const filterComponent = new FilterView(this.#filters, this.filterContainer);
+    const filterComponent = new FilterView(this.#filters);
     render(filterComponent, this.#filterContainer, RenderPosition.AFTERBEGIN);
   };
 
