@@ -1,4 +1,4 @@
-import { getRandomArrayElement } from '../utils.js';
+import { getRandomArrayElement } from '../utils/common.js';
 import { CITIES, DESCRIPTION } from './consts-mock.js';
 
 export default function generateDestination() {

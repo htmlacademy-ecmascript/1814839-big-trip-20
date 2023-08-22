@@ -3,8 +3,10 @@ import SortView from '../view/sort-view.js';
 import TripInfoView from '../view/trip-info-view.js';
 import FilterView from '../view/filter-view.js';
 import ListView from '../view/list-view.js';
-import { RenderPosition, replace, render } from '../framework/render.js';
 import EditPointView from '../view/edit-point-view.js';
+import NoPointView from '../view/no-point-view.js';
+import { RenderPosition, replace, render } from '../framework/render.js';
+import { generateFilters } from '../mock/filter-mock.js';
 
 export default class BoardPresenter {
 
@@ -15,6 +17,7 @@ export default class BoardPresenter {
   #destinationModel = null;
   #board = null;
   #offersModel = null;
+  #filters = [];
 
   constructor({ sortContainer, tripInfoContainer, filterContainer, listContainer,
     destinationsModel, pointsModel, offersModel }) {
@@ -31,8 +34,8 @@ export default class BoardPresenter {
     this.pointsModel = pointsModel;
     this.points = [...pointsModel.get()];
     this.#offersModel = offersModel.get();
-
     this.#board = null;
+    this.#filters = generateFilters(this.points);
   }
 
   //отрисовка инфы о трипе
@@ -41,9 +44,16 @@ export default class BoardPresenter {
     render(tripInfoConponent, this.#tripInfoContainer, RenderPosition.AFTERBEGIN);
   };
 
+  //отрисовка вида без евентов
+  #renderNoPoinView = () => {
+    const noPointComponent = new NoPointView();
+    render(noPointComponent, this.#listContainer);
+  };
+
   //отрисовка фильтрации
+  //настроить передачу фильтров
   #renderFilterComponent = () => {
-    const filterComponent = new FilterView();
+    const filterComponent = new FilterView(this.#filters);
     render(filterComponent, this.#filterContainer, RenderPosition.AFTERBEGIN);
   };
 
@@ -60,7 +70,7 @@ export default class BoardPresenter {
     this.#board = document.querySelector('.trip-events__list');
   };
 
-  //отрисовка точек
+  //отрисовка одной точки
   #renderEvent = (eventPoint) => {
     const pointComponent = new TripPointView({
       point: eventPoint,
@@ -115,17 +125,27 @@ export default class BoardPresenter {
     render(pointComponent, this.#board);
   };
 
+  //отрисовка всех точек
   #renderEvents() {
     this.points.forEach((point) => {
       this.#renderEvent(point);
     });
   }
 
-  init() {
+  //отрисовка доски полностью со всеми компонентами
+  #renderBoard = () => {
+    if (this.points.length <= 0) {
+      this.#renderNoPoinView();
+      return;
+    }
     this.#renderSortComponent();
     this.#renderListComponent();
     this.#renderInfoComponent();
     this.#renderFilterComponent();
     this.#renderEvents();
+  };
+
+  init() {
+    this.#renderBoard();
   }
 }

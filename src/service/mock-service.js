@@ -1,5 +1,5 @@
 import { DESTINATION_COUNT, OFFER_COUNT, POINT_COUNT, TYPES } from '../mock/consts-mock.js';
-import { getRandomInteger, getRandomArrayElement } from '../utils.js';
+import { getRandomInteger, getRandomArrayElement } from '../utils/common.js';
 import generateDestination from '../mock/destination-mock.js';
 import generateOffer from '../mock/offer-mock.js';
 import generatePoint from '../mock/point-mock.js';
